@@ -15,8 +15,10 @@ Dynamics CRM allows you to select advanced find queries specifically for the rec
 
 ### Installing
 
-* xrmearthselectfetchxmlview.zip çözümünü indirip ve crm'e ekleyin
-* ardından buradaki örneği (https://drive.google.com/drive/u/0/folders/14MyAatLwWEs1QLG0hCma3a9ORaC2xB1U) inceleyerek, özelleştirin
+* Download solution [xrmearthselectfetchxmlview.zip](https://drive.google.com/file/d/1exqfkU8cDKNVhKykTZYzb0tfdWWgpL67/view?usp=sharing)  and add it to crm.
+* then customize it by reviewing the [example here](https://drive.google.com/drive/u/0/folders/14MyAatLwWEs1QLG0hCma3a9ORaC2xB1U)
+
+
 
 ### Example Parameters
 
