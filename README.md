@@ -1,10 +1,10 @@
 # Xrm Earth Select Fetch Xml View
 
-Select Dynamics CRM advanced find queries on record.
+* Select Dynamics CRM advanced find queries on record.
 
 ## Description
 
-Dynamics CRM allows you to select advanced find queries specifically for the record and use them flexibly in your development.
+* Dynamics CRM allows you to select advanced find queries specifically for the record and use them flexibly in your development.
 
 ## Getting Started
 
