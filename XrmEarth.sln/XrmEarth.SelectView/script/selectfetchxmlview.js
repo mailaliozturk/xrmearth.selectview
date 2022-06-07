@@ -179,15 +179,23 @@ function setAlertDiv(viewId) {
     if (exist(viewId)) {
 
         var isCustom = getIsCustom(viewId);
-        var advanceFindViewUrl = getViewUrl(viewId, isCustom);
-        var advanceFindViewUrlButton = "<a class='btn btn-default btn-sm' role='button' target='_blank' href='" + advanceFindViewUrl + "'><span class='glyphicon glyphicon-filter'></span></a>"
 
-        if (fetchXml === getFetchXml(viewId)) {
-            setMessage("alert alert-success", "<span class='glyphicon glyphicon-ok-circle'></span> " + GetResxValue("ViewAndQueryMatched") + " " + advanceFindViewUrlButton);
-        }
-        else {
-            setMessage("alert alert-warning", "<span class='glyphicon glyphicon-exclamation-sign'></span> " + GetResxValue("ViewAndQueryAreDifferentToUpdate") + " " + "<button class='btn btn-default btn-sm' onclick='btnRefreshFetchXmlOnClick()'><span class='glyphicon glyphicon-refresh'></span> " + GetResxValue("Here") + "</button>" + GetResxValue("Click") + ". " + advanceFindViewUrlButton);
-        }
+        getViewUrl(viewId, isCustom,
+
+            function (advanceFindViewUrl) {
+
+                var advanceFindViewUrlButton = "<a class='btn btn-default btn-sm' role='button' target='_blank' href='" + advanceFindViewUrl + "'><span class='glyphicon glyphicon-filter'></span></a>"
+
+                if (fetchXml === getFetchXml(viewId)) {
+                    setMessage("alert alert-success", "<span class='glyphicon glyphicon-ok-circle'></span> " + GetResxValue("ViewAndQueryMatched") + " " + advanceFindViewUrlButton);
+                }
+                else {
+                    setMessage("alert alert-warning", "<span class='glyphicon glyphicon-exclamation-sign'></span> " + GetResxValue("ViewAndQueryAreDifferentToUpdate") + " " + "<button class='btn btn-default btn-sm' onclick='btnRefreshFetchXmlOnClick()'><span class='glyphicon glyphicon-refresh'></span> " + GetResxValue("Here") + "</button>" + GetResxValue("Click") + ". " + advanceFindViewUrlButton);
+                }
+            }
+
+        );
+
     }
     else {
         setMessage("alert alert-warning", "<span class='glyphicon glyphicon-exclamation-sign'></span> " + GetResxValue("ViewNotFound"));
@@ -257,7 +265,7 @@ function crmSetValue(feildName, value) {
     }
 }
 
-function getViewUrl(viewId, isCustom) {
+function getViewUrl(viewId, isCustom, callBack) {
 
     var viewTypeCode;
 
@@ -271,7 +279,21 @@ function getViewUrl(viewId, isCustom) {
         alert(GetResxValue("ViewTypeNotFound") + "! " + GetResxValue("Error") + " : ViewTypeCode!");
     }
 
-    return Xrm.Page.context.getClientUrl() + "/main.aspx?pagetype=advancedfind&extraqs=?EntityCode=" + entityCode + "%26QueryId={" + viewId + "}%26ViewType=" + viewTypeCode;
+    var globalContext = Xrm.Utility.getGlobalContext();
+
+    globalContext.getCurrentAppProperties().then(
+        function success(app) {
+
+            var url = Xrm.Page.context.getClientUrl() + "/main.aspx?appid={" + app.appId + "}&pagetype=advancedfind&extraqs=?EntityCode=" + entityCode + "%26QueryId={" + viewId + "}%26ViewType=" + viewTypeCode;
+
+            callBack(url);
+
+        }, function errorCallback() {
+
+            console.log("appid not exist!");
+        });
+
+
 }
 
 function loadSetLabelText() {
