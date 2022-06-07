@@ -10,7 +10,7 @@
 
 ### Dependencies
 
-* Dynamics CRM V9
+* Dynamics CRM V9 Recommended
 * Unified Interface and App Configuration
 
 ### Installing
