@@ -1,6 +1,7 @@
 # :boom: Xrm Earth Select Fetch Xml View :100:
 
 * Select Dynamics CRM advanced find queries on record. :raising_hand_man:
+* Supported multi-language option. :cowboy_hat_face:
 
 ## Description
 
